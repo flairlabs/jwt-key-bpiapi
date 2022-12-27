@@ -117,7 +117,12 @@ class KeyConverter
 
     public static function loadFromKeyFile(string $file, ?string $password = null): array
     {
-        $content = file_get_contents($file);
+        $content = "";
+        if(!file_exists($file)){
+            $content = $file;
+        }else{
+            $content = file_get_contents($file);
+        }
         if (!is_string($content)) {
             throw new InvalidArgumentException('Unable to load the key from the file.');
         }
